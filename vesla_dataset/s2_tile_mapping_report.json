@@ -1,0 +1,90 @@
+{
+  "input_csv": "D:\\Water Quality Parameter Estimation\\wq_pipeline\\artifacts\\release\\finland_full_dataset.csv",
+  "n_rows_before_filters": 19386,
+  "n_rows_input": 19386,
+  "n_unique_tiles": 32,
+  "tile_column": "s2_mgrs_tile",
+  "bbox_tile_column": "point_mgrs_tile",
+  "strict_s2_bbox": true,
+  "color_by": "chl_a",
+  "filters": {
+    "start_date": null,
+    "end_date": null,
+    "max_cloud_cover": null,
+    "max_abs_day_diff": null
+  },
+  "n_drawn_points_interactive": 2000,
+  "n_point_vs_s2_tile_matches": 18214,
+  "n_point_vs_s2_tile_mismatches": 1172,
+  "point_vs_s2_tile_mismatch_top_pairs": [
+    {
+      "s2_mgrs_tile": "35WNM",
+      "point_mgrs_tile": "35VLG",
+      "n_rows": 141
+    },
+    {
+      "s2_mgrs_tile": "35WMP",
+      "point_mgrs_tile": "35VNH",
+      "n_rows": 102
+    },
+    {
+      "s2_mgrs_tile": "35VNL",
+      "point_mgrs_tile": "35VNH",
+      "n_rows": 86
+    },
+    {
+      "s2_mgrs_tile": "34VEN",
+      "point_mgrs_tile": "35VML",
+      "n_rows": 84
+    },
+    {
+      "s2_mgrs_tile": "35VNH",
+      "point_mgrs_tile": "35VPJ",
+      "n_rows": 83
+    },
+    {
+      "s2_mgrs_tile": "35VLJ",
+      "point_mgrs_tile": "35VML",
+      "n_rows": 64
+    },
+    {
+      "s2_mgrs_tile": "34VEN",
+      "point_mgrs_tile": "35VLG",
+      "n_rows": 52
+    },
+    {
+      "s2_mgrs_tile": "35VLL",
+      "point_mgrs_tile": "35VNH",
+      "n_rows": 44
+    },
+    {
+      "s2_mgrs_tile": "36VUR",
+      "point_mgrs_tile": "35VNH",
+      "n_rows": 44
+    },
+    {
+      "s2_mgrs_tile": "34VEP",
+      "point_mgrs_tile": "34VFN",
+      "n_rows": 44
+    }
+  ],
+  "n_stations_with_point_vs_s2_tile_mismatch": 13,
+  "outputs": {
+    "png": "D:\\Water Quality Parameter Estimation\\wq_pipeline\\artifacts\\figures\\finland\\stations_on_s2_tile_bboxes.png",
+    "html": "D:\\Water Quality Parameter Estimation\\wq_pipeline\\artifacts\\figures\\finland\\stations_on_s2_tile_bboxes.html",
+    "tile_counts_csv": "D:\\Water Quality Parameter Estimation\\wq_pipeline\\artifacts\\release\\stations_per_s2_tile.csv",
+    "dashboard_png": "D:\\Water Quality Parameter Estimation\\wq_pipeline\\artifacts\\figures\\finland\\s2_tile_dashboard.png",
+    "municipality_summary_csv": "D:\\Water Quality Parameter Estimation\\wq_pipeline\\artifacts\\release\\municipality_summary.csv",
+    "waterbasin_summary_csv": "D:\\Water Quality Parameter Estimation\\wq_pipeline\\artifacts\\release\\waterbasin_summary.csv",
+    "municipality_choropleth_png": "D:\\Water Quality Parameter Estimation\\wq_pipeline\\artifacts\\figures\\finland\\municipality_choropleth_rows.png"
+  },
+  "bbox_sources": {
+    "mgrs": 32
+  },
+  "n_tiles_bbox_adjusted": 0,
+  "n_points_outside_bboxes": 996,
+  "has_finland_boundary_basemap": true,
+  "static_basemap_mode": "web_tiles",
+  "static_basemap_provider": "CartoDB.Positron",
+  "municipality_choropleth_generated": true
+}

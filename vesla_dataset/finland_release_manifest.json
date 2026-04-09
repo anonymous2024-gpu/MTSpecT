@@ -1,0 +1,39 @@
+{
+  "source_csv": "D:\\Water Quality Parameter Estimation\\wq_pipeline\\artifacts\\release\\finland_complete_extended_paired_s2.csv",
+  "full_dataset_csv": "D:\\Water Quality Parameter Estimation\\wq_pipeline\\artifacts\\release\\finland_full_dataset.csv",
+  "eo_paired_subset_csv": "D:\\Water Quality Parameter Estimation\\wq_pipeline\\artifacts\\release\\finland_eo_paired_subset.csv",
+  "n_full_rows": 19386,
+  "n_eo_paired_rows": 1174,
+  "n_unique_stations_full": 138,
+  "n_unique_stations_eo": 13,
+  "parameter_non_null_full": {
+    "chl_a": 1326,
+    "doc": 4068,
+    "secchi_depth": 0,
+    "turbidity": 16476,
+    "tp": 17904,
+    "tn": 18900,
+    "toc": 12168,
+    "conductivity": 14700,
+    "dissolved_oxygen": 7734,
+    "ph": 18834,
+    "temperature": 17976,
+    "suspended_solids": 16074,
+    "oxygen_saturation": 7716
+  },
+  "parameter_non_null_eo": {
+    "chl_a": 368,
+    "doc": 78,
+    "secchi_depth": 0,
+    "turbidity": 1174,
+    "tp": 1174,
+    "tn": 1174,
+    "toc": 239,
+    "conductivity": 1008,
+    "dissolved_oxygen": 776,
+    "ph": 1174,
+    "temperature": 1163,
+    "suspended_solids": 1076,
+    "oxygen_saturation": 770
+  }
+}

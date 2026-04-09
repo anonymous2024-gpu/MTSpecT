@@ -1,0 +1,47 @@
+{
+  "snapshot_date": "2026-02-28",
+  "workspace_root": "D:\\Water Quality Parameter Estimation\\wq_pipeline",
+  "items": [
+    {
+      "path": "data\\raw\\in_situ_finland.csv",
+      "exists": true,
+      "sha256": "ed86ed3ec112aa379d93212714182dbfc869ac0ced495f8f449344df72414ac8",
+      "bytes": 4704981,
+      "rows": 19386
+    },
+    {
+      "path": "artifacts\\pipeline\\prepare_in_situ.csv",
+      "exists": true,
+      "sha256": "ed86ed3ec112aa379d93212714182dbfc869ac0ced495f8f449344df72414ac8",
+      "bytes": 4704981,
+      "rows": 19386
+    },
+    {
+      "path": "data\\raw\\eo_features_finland_s2meta.csv",
+      "exists": true,
+      "sha256": "00ee70f2da0a1600ca7a1677ef093e84f3e61e4ecc5d7dd47ae11d1729f7164a",
+      "bytes": 2662309,
+      "rows": 19386
+    },
+    {
+      "path": "artifacts\\release\\finland_full_dataset.csv",
+      "exists": true,
+      "sha256": "6a2d6c5c1cfc63b9489c20c44f69f5925104ae5ca6cbe4cff46b32b8e6fcb78a",
+      "bytes": 5048307,
+      "rows": 19386
+    },
+    {
+      "path": "artifacts\\release\\finland_eo_paired_subset.csv",
+      "exists": true,
+      "sha256": "8d515bd386a9387b9421b7ada6ac0912c2492366ad21099133619c38fb19ebc5",
+      "bytes": 445366,
+      "rows": 1174
+    },
+    {
+      "path": "artifacts\\release\\finland_release_manifest.json",
+      "exists": true,
+      "sha256": "655b4787cb697044b4a58276f637bbabd4c9f40f7ce2a97503d523e9ccfb5bd3",
+      "bytes": 1189
+    }
+  ]
+}
