@@ -1,8 +1,4 @@
-# MT-SpecT++ — Reproducibility Guide
-
-**Paper:** _MT-SpecT++: Quality-Gated Multimodal Spectro-Temporal Transformer for Inland Water Quality Estimation_  
-**Status:** Anonymous submission — under review. This bundle contains no author,
-institution, or machine-identifying information and uses only relative paths.
+# MT-SpecT — Reproducibility Guide
 
 This folder contains the source, driver scripts, and data needed to reproduce
 the experiments and figures in the paper. It ships (i) the complete source
