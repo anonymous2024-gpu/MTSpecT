@@ -12,7 +12,7 @@ directly from this bundle, and the step-by-step sections for the full pipeline.
 ## Contents
 
 ```
-reproducibility_code/
+code/
 ├── README.md               ← this file
 ├── requirements.txt        ← pinned dependencies
 ├── pyproject.toml          ← package definition (install with pip install -e .)
