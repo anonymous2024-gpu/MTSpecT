@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+
+# Generated pipeline outputs (not part of the shipped sample data)
+artifacts/
+
+# Model checkpoints / large binaries produced by running the scripts
+*.pt
+*.pth
+*.ckpt
+
+# Local secrets / env
+.env
+*.env
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

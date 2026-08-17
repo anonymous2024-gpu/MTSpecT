@@ -1,0 +1,229 @@
+seed: 42
+artifacts_dir: artifacts
+
+paths:
+  in_situ_csv: data/raw/in_situ.csv
+  eo_features_csv: data/raw/eo_features.csv
+
+targets:
+  - chl_a
+  - tn
+  - tp
+  - turbidity
+  - conductivity
+
+matchup:
+  date_tolerance_days: 3
+  require_same_station: true
+  min_targets_per_row: 1
+
+split:
+  group_column: lake_id
+  test_size: 0.2
+  valid_size: 0.1
+
+training:
+  model_type: random_forest
+  n_estimators: 400
+  max_depth: 12
+  min_samples_leaf: 2
+  n_jobs: -1
+
+features:
+  exclude_columns:
+    - sample_id
+    - station_id
+    - lake_id
+    - sample_date
+    - acquisition_date
+    - eo_id
+    - lat
+    - lon
+
+pretrained:
+  hidden_dim: 256
+  dropout: 0.1
+  epochs: 100
+  early_stopping_patience: 15
+  early_stopping_min_delta: 0.0001
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  checkpoint_path: ""
+
+fusion:
+  profile: small
+  temporal_steps: 5
+  temporal_attention: true
+  heteroscedastic: true
+  hidden_dim: 192
+  tabular_hidden_dim: 128
+  temporal_hidden_dim: 128
+  num_heads: 4
+  num_layers: 1
+  dropout: 0.1
+  epochs: 100
+  early_stopping_patience: 15
+  early_stopping_min_delta: 0.0001
+  batch_size: 256
+  learning_rate: 0.0008
+  weight_decay: 0.00001
+  pretrained_checkpoint_path: ""
+
+hf_pretrained:
+  enabled: true
+  chip_shared_dir: artifacts/chips_shared
+  checkpoint_root: artifacts/checkpoints/hf
+  cache_dir: artifacts/hf_cache
+  token_env_var: HF_TOKEN
+  image_model_ids:
+    - facebook/dinov2-base
+    - openai/clip-vit-large-patch14
+    - google/vit-large-patch16-224-in21k
+    - google/siglip-base-patch16-224
+    - MVRL/satmaepp_ViT-L_pretrain_fmow_rgb
+  multispectral_image_model_ids:
+    - ibm-nasa-geospatial/Prithvi-EO-1.0-100M
+    - MVRL/satmae-vitbase-multispec-pretrain
+  multispectral:
+    bands: [B02, B03, B04, B08, B11, B12]
+    fallback_to_zero_for_missing_band: true
+    clip_percentile_low: 2.0
+    clip_percentile_high: 98.0
+    scale_to_minus_one_one: false
+    pooling: cls
+    pooling_ablation: [mean_patch, mean_patch_water]
+    water_mask_threshold: 0.0
+    trust_remote_code: false
+    model_overrides:
+      "ibm-nasa-geospatial/Prithvi-EO-1.0-100M":
+        bands: [B02, B03, B04, B05, B06, B07]
+        pooling: mean_patch
+        trust_remote_code: true
+      "MVRL/satmae-vitbase-multispec-pretrain":
+        bands: [B02, B03, B04, B08, B05, B06, B07, B8A, B11, B12]
+        image_size: 96
+        pooling: mean_patch
+        trust_remote_code: true
+  fusion_mode: stacked
+  cca_pre_fusion:
+    enabled: true
+    n_components: 16
+  temporal_text_model_ids:
+    - Qwen/Qwen2.5-3B-Instruct
+    - sentence-transformers/all-mpnet-base-v2
+    - sentence-transformers/all-MiniLM-L6-v2
+  multimodal_setups:
+    - name: hf_npzms_tabular_prithvi_mpnet
+      image_model_id: ibm-nasa-geospatial/Prithvi-EO-1.0-100M
+      image_source: npz_ms
+      include_tabular: true
+      include_tabular_raw: true
+      include_temporal: false
+      text_model_id: sentence-transformers/all-mpnet-base-v2
+      multispectral:
+        bands: [B02, B03, B04, B08, B11, B12]
+        pooling: mean_patch_water
+    - name: hf_npzms_tabular_satmae_minilm
+      image_model_id: MVRL/satmae-vitbase-multispec-pretrain
+      image_source: npz_ms
+      include_tabular: true
+      include_tabular_raw: true
+      include_temporal: false
+      text_model_id: sentence-transformers/all-MiniLM-L6-v2
+      multispectral:
+        bands: [B02, B03, B04, B08, B05, B06, B07, B8A, B11, B12]
+        image_size: 96
+        pooling: mean_patch
+  max_text_features: 64
+  image_size: 224
+  ridge_alpha: 1.0
+  save_embeddings: false
+
+region_transfer:
+  region_column: station_id
+  target_region: "10060"
+  pretrain_epochs: 20
+  finetune_epochs: 10
+  finetune_learning_rate: 0.0001
+
+llm:
+  base_url: https://api.openai.com/v1
+  model: gpt-4o-mini
+  timeout: 60
+  api_key: ""
+
+finland_syke:
+  start_date: 2023-01-01
+  end_date: 2025-01-01
+  station_limit: null
+  depth_layer: "any"
+  parameters:
+    - Chlorophyll a
+    - Turbidity
+    - Secchi depth
+    - Dissolved organic carbon
+    - Total phosphorus
+    - Total nitrogen
+  outputs:
+    in_situ_csv: data/raw/in_situ_finland.csv
+    long_csv: data/external/finland_syke_long.csv
+    station_csv: data/external/finland_syke_stations.csv
+
+s2_metadata:
+  stac_url: https://planetarycomputer.microsoft.com/api/stac/v1
+  collection: sentinel-2-l2a
+  tolerance_days: 5
+  limit: 10
+  max_rows: null
+  input_in_situ_csv: data/raw/in_situ_finland.csv
+  output_eo_csv: data/raw/eo_features_finland_s2meta.csv
+
+temporal_features:
+  stac_url: https://planetarycomputer.microsoft.com/api/stac/v1
+  collection: sentinel-2-l2a
+  temporal_offsets_days: [-7, -5, -3, -1, 0, 1, 3, 5, 7]
+  offset_tolerance_days: 1
+  progress_every_rows: 25
+  max_cloud_cover: 40
+  max_rows: 200
+  bands: [B02, B03, B04, B08]
+  timeout_seconds: 90
+
+image_chips:
+  stac_url: https://planetarycomputer.microsoft.com/api/stac/v1
+  collection: sentinel-2-l2a
+  tolerance_days: 7
+  limit: 50
+  max_cloud_cover: 40
+  max_solar_zenith: 85
+  chip_size: 256
+  overlap_stride_pixels: 128
+  emit_chip_images: true
+  chip_image_format: png
+  chip_image_quality: null
+  chip_image_rgb_bands: [B04, B03, B02]
+  chip_image_stretch_p_low: 2.0
+  chip_image_stretch_p_high: 98.0
+  bands: [B02, B03, B04, B08]
+  max_rows: null
+  max_nodata_ratio: 0.5
+  timeout_seconds: 90
+
+multimodal_index:
+  enabled: true
+
+vesla_odata:
+  service_root: https://rajapinnat.ymparisto.fi/api/vesla/2.0/odata
+  start_date: 2020-01-01
+  end_date: 2025-12-31
+  top: 1000
+  max_pages: 20
+  apply_date_filter: false
+  outputs:
+    in_situ_csv: data/raw/in_situ_vesla_odata.csv
+    long_csv: data/external/vesla_odata_long.csv
+    site_csv: data/external/vesla_odata_sites.csv
+    catalog_csv: data/external/vesla_parameter_catalog.csv
+    determination_csv: data/external/vesla_determination_catalog.csv
+    report_json: artifacts/vesla_odata/report.json

@@ -1,0 +1,47 @@
+# MT-SpecT++ — Water Quality Parameter Estimation
+# Python >= 3.11 required
+# CUDA >= 12.4 required for GPU training (RTX 5090 / Ada Lovelace)
+#
+# Install:
+#   pip install -r requirements.txt
+#   pip install -e .
+
+# ---- Core scientific stack --------------------------------------------------
+numpy>=1.26
+pandas>=2.2
+scipy>=1.13
+scikit-learn>=1.5
+joblib>=1.5
+
+# ---- Deep learning ----------------------------------------------------------
+torch>=2.10
+torchvision>=0.21
+
+# ---- Transformers / VLM / LoRA ----------------------------------------------
+transformers>=4.46
+timm>=1.0
+peft>=0.13          # LoRA / QLoRA adapters
+
+# ---- Remote sensing & geospatial --------------------------------------------
+rasterio>=1.4
+geopandas>=0.14
+planetary-computer>=1.0
+pystac-client>=0.7
+Pillow>=10.4
+mgrs>=1.5
+
+# ---- Visualisation ----------------------------------------------------------
+matplotlib>=3.9
+folium>=0.20
+contextily>=1.6
+
+# ---- Pipeline & config ------------------------------------------------------
+pyyaml>=6.0
+typer>=0.12
+requests>=2.32
+
+# ---- Experiment tracking (optional) -----------------------------------------
+wandb>=0.17         # remove if not using W&B logging
+
+# ---- Development / testing --------------------------------------------------
+pytest>=8.0
